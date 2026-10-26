@@ -1,0 +1,26 @@
+Default.aspx
+<asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+<br /><br />
+<asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+<br /><br />
+<asp:Button ID="Button1"
+ runat="server"
+ Text="Calculate Difference"
+ OnClick="Button1_Click" />
+<br /><br />
+<asp:Label ID="Label1"
+ runat="server"
+ Font-Bold="True"></asp:Label>
+
+Default.aspx.cs
+
+using System;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ TimeSpan diff = Calendar2.SelectedDate - Calendar1.SelectedDate;
+ Label1.Text = "Difference between dates: " +
+ Math.Abs(diff.Days) + " Days";
+ }
+}
