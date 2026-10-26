@@ -1,0 +1,7 @@
+Default.aspx
+<asp:Calendar ID="Calendar1" runat="server">
+ <SelectedDayStyle
+ BackColor="Blue"
+ ForeColor="White"
+ Font-Bold="True" />
+</asp:Calendar>
