@@ -1,0 +1,1403 @@
+Program 1 : Create an application that obtains four int values from the
+user and displays the product.
+using System;
+class Program
+{
+ static void Main()
+ {
+ Console.WriteLine("Enter four integer values:");
+ Console.Write("Enter first number: ");
+ int num1 = Convert.ToInt32(Console.ReadLine());
+ Console.Write("Enter second number: ");
+ int num2 = Convert.ToInt32(Console.ReadLine());
+ Console.Write("Enter third number: ");
+ int num3 = Convert.ToInt32(Console.ReadLine());
+ Console.Write("Enter fourth number: ");
+ int num4 = Convert.ToInt32(Console.ReadLine());
+ int product = num1 * num2 * num3 * num4;
+ Console.WriteLine($"\nThe product of the four numbers is:
+{product}");
+ }
+}
+
+Create an application to demonstrate following operations
+[i] Fibonacci Series
+using System;
+class Program
+{
+ static void Main()
+ {
+ Console.Write("Enter the number of terms for Fibonacci series: ");
+ int terms = Convert.ToInt32(Console.ReadLine());
+ Console.WriteLine("\nFibonacci Series:");
+ int first = 0, second = 1, next;
+ for (int i = 0; i < terms; i++)
+ {
+ if (i <= 1)
+ next = i;
+ else
+ {
+ next = first + second;
+ first = second;
+ second = next;
+ }
+ Console.Write(next + " ");
+ }
+ Console.WriteLine(); // For spacing
+ }
+}
+
+Prime No.
+using System;
+class Program
+{
+ static void Main()
+ {
+ Console.Write("Enter a number to check if it is prime: ");
+ int number = Convert.ToInt32(Console.ReadLine());
+ if (IsPrime(number))
+ {
+ Console.WriteLine($"{number} is a Prime Number.");
+ }
+ else
+ {
+ Console.WriteLine($"{number} is NOT a Prime Number.");
+ }
+ }
+ static bool IsPrime(int num)
+ {
+ if (num <= 1)
+ return false;
+ for (int i = 2; i <= Math.Sqrt(num); i++)
+ {
+ if (num % i == 0)
+ return false;
+ }
+ return true;
+ }
+}
+
+Factorial No.
+4
+using System;
+namespace Factorial
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ int number, fact = 1;
+ Console.WriteLine("Enter a non-negative integer:");
+ // Input validation
+ if (int.TryParse(Console.ReadLine(), out number) && number >=
+0)
+ {
+ for (int i = 1; i <= number; i++)
+ {
+ fact *= i;
+ }
+ Console.WriteLine($"\nFactorial of {number} is: {fact}");
+ }
+ else
+ {
+ Console.WriteLine("Invalid input! Please enter a non-negative
+integer.");
+ }
+ Console.ReadLine();
+ }
+ }
+}
+
+
+
+Temperature Conversion
+using System;
+namespace TemperatureConversion
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ Console.WriteLine("Enter the Temperature in Celsius (°C):");
+ // Input validation
+ if (int.TryParse(Console.ReadLine(), out int celsius))
+ {
+ int fahrenheit = (celsius * 9) / 5 + 32;
+ Console.WriteLine("Temperature in Fahrenheit (°F): " +
+fahrenheit);
+ }
+ else
+ {
+ Console.WriteLine("Invalid input! Please enter a valid integer
+temperature.");
+ }
+ Console.ReadLine();
+ }
+ }
+}
+
+
+Money Conversion
+using System;
+namespace CurrencyConverter
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ double amount, result;
+ double usdRate = 83.20; // Example: 1 USD = 83.20 INR (can be
+updated)
+ int choice;
+ Console.WriteLine("Currency Converter");
+ Console.WriteLine("1. INR to USD");
+ Console.WriteLine("2. USD to INR");
+ Console.Write("Enter your choice (1 or 2): ");
+ choice = int.Parse(Console.ReadLine());
+ if (choice == 1)
+ {
+ Console.Write("Enter amount in INR: ");
+ amount = double.Parse(Console.ReadLine());
+ result = amount / usdRate;
+ Console.WriteLine("Equivalent USD: $" +
+result.ToString("0.00"));
+ }
+ else if (choice == 2)
+ {
+ Console.Write("Enter amount in USD: ");
+ amount = double.Parse(Console.ReadLine());
+ result = amount * usdRate;
+ Console.WriteLine("Equivalent INR: ₹" +
+result.ToString("0.00"));
+ }
+ else
+ {
+ Console.WriteLine("Invalid choice.");
+ }
+ Console.ReadLine();
+ }
+ }
+}
+
+
+Function Overloading
+using System;
+namespace Swap
+{
+ class Overloading
+ {
+ public void swap(ref int n, ref int m)
+ {
+ int t = n;
+ n = m;
+ m = t;
+ }
+ public void swap(ref float f1, ref float f2)
+ {
+ float temp = f1;
+ f1 = f2;
+ f2 = temp;
+ }
+ }
+
+
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ Overloading objOverloading = new Overloading();
+ int n = 10, m = 20;
+ objOverloading.swap(ref n, ref m);
+ Console.WriteLine("After Swapping Integers: N = " + n + "\tM = "
++ m);
+ float f1 = 10.5f, f2 = 20.6f;
+ objOverloading.swap(ref f1, ref f2);
+ Console.WriteLine("After Swapping Floats: F1 = " + f1 + "\tF2 = "
++ f2);
+ Console.ReadLine(); // Pause to view 
+ }
+ }
+}
+
+
+Practical No.: 3
+Working with Web Forms and Controls.
+Demonstrate the use of Calendar control to perform following operations.
+a) Display messages in a calendar control
+b) Display vacation in a calendarcontrol
+c) Selected day in a calendar control using style
+d) Difference between two calendar dates
+a) Display messages in a calendar control
+Default.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeFile="Default.aspx.cs" Inherits="_Default" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title>Calendar Message</title>
+</head>
+<body>
+<form id="form1" runat="server">
+<asp:Calendar ID="Calendar1" runat="server"
+ OnSelectionChanged="Calendar1_SelectionChanged">
+</asp:Calendar>
+<br />
+<asp:Label ID="Label1" runat="server" Font-Bold="True"></asp:Label>
+</form>
+</body>
+</html>
+Default.aspx.cs 
+using System;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+ {
+ Label1.Text = "You selected: " +
+ Calendar1.SelectedDate.ToLongDateString();
+ }
+}
+b) Display vacation in a calendar control
+Default.aspx
+<asp:Calendar ID="Calendar1" runat="server"
+ OnDayRender="Calendar1_DayRender">
+</asp:Calendar>
+Default.aspx.cs
+using System;
+using System.Web.UI.WebControls;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+ {
+ if (e.Day.Date == new DateTime(2026, 12, 25))
+ {
+ e.Cell.BackColor = System.Drawing.Color.Yellow;
+ e.Cell.Controls.Add(new LiteralControl("<br/>Vacation"));
+ }
+ }
+}
+c) Selected day in a calendar control using style
+Default.aspx
+<asp:Calendar ID="Calendar1" runat="server">
+ <SelectedDayStyle
+ BackColor="Blue"
+ ForeColor="White"
+ Font-Bold="True" />
+</asp:Calendar>
+D) Difference Between Two Calendar Dates
+Default.aspx
+<asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>
+<br /><br />
+<asp:Calendar ID="Calendar2" runat="server"></asp:Calendar>
+<br /><br />
+<asp:Button ID="Button1"
+ runat="server"
+ Text="Calculate Difference"
+ OnClick="Button1_Click" />
+<br /><br />
+<asp:Label ID="Label1"
+ runat="server"
+ Font-Bold="True"></asp:Label>
+Default.aspx.cs
+using System;
+public partial class _Default : System.Web.UI.Page
+{
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ TimeSpan diff = Calendar2.SelectedDate - Calendar1.SelectedDate;
+ Label1.Text = "Difference between dates: " +
+ Math.Abs(diff.Days) + " Days";
+ }
+}
+
+
+Practical No.: 4
+Create a simple web page with various server controls to demonstrate
+setting and use of their properties. (example AutoPostBack) 
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Pract3a.aspx.cs"
+Inherits="practical3a.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>Practical 3A</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+<div>
+ <asp:Label ID="Label1" runat="server" Text="ViewState Data :
+"></asp:Label>
+ <asp:Label ID="lblstr" runat="server"></asp:Label>
+ <br /><br />
+ <asp:Button ID="Button1" runat="server"
+ Text="Get Data"
+ OnClick="Button1_Click" />
+ <br /><br />
+ <asp:ListBox ID="ListBox1" runat="server"
+ SelectionMode="Multiple">
+ <asp:ListItem>C#</asp:ListItem>
+ <asp:ListItem>C++</asp:ListItem>
+ <asp:ListItem>Java</asp:ListItem>
+ <asp:ListItem>C</asp:ListItem>
+ </asp:ListBox>
+ <br /><br />
+ <asp:TextBox ID="TextBox1"
+ runat="server"
+ TextMode="MultiLine"
+ Rows="5"
+ Columns="25"></asp:TextBox>
+ <br /><br />
+ <asp:Button ID="Button2"
+ runat="server"
+ Text="Show"
+ OnClick="Button2_Click" />
+ <br /><br />
+<asp:Label ID="Label2" runat="server" Text="Select Color :"></asp:Label>
+ <asp:RadioButton ID="RadioButton1"
+ runat="server"
+ Text="Red"
+ GroupName="Color"
+ AutoPostBack="True"
+ OnCheckedChanged="RadioButton1_CheckedChanged" />
+ <asp:RadioButton ID="RadioButton2"
+ runat="server"
+ Text="Green"
+ GroupName="Color"
+ AutoPostBack="True"
+ OnCheckedChanged="RadioButton2_CheckedChanged" />
+ <asp:RadioButton ID="RadioButton3"
+ runat="server"
+ Text="Blue"
+ GroupName="Color"
+ AutoPostBack="True"
+ OnCheckedChanged="RadioButton3_CheckedChanged" />
+ <br /><br />
+ <asp:Label ID="Label3" runat="server" Text="Select Formatting
+:"></asp:Label>
+ <asp:CheckBox ID="CheckBox1"
+ runat="server"
+ Text="Bold"
+ AutoPostBack="True"
+ OnCheckedChanged="CheckBox1_CheckedChanged" />
+ <asp:CheckBox ID="CheckBox2"
+ runat="server"
+ Text="Italic"
+ AutoPostBack="True"
+ OnCheckedChanged="CheckBox2_CheckedChanged" />
+<asp:CheckBox ID="CheckBox3"
+ runat="server"
+ Text="Underline"
+ AutoPostBack="True"
+ OnCheckedChanged="CheckBox3_CheckedChanged" />
+ <br /><br />
+ <asp:Label ID="Label4" runat="server" Text="Select Size :"></asp:Label>
+ <asp:DropDownList ID="DropDownList1"
+ runat="server"
+ AutoPostBack="True"
+ OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+ <asp:ListItem>10</asp:ListItem>
+ <asp:ListItem>20</asp:ListItem>
+ <asp:ListItem>30</asp:ListItem>
+ <asp:ListItem>40</asp:ListItem>
+ <asp:ListItem>50</asp:ListItem>
+ </asp:DropDownList>
+ <br /><br />
+ <asp:Label ID="Label5" runat="server" Text="Select Name :"></asp:Label>
+ <asp:DropDownList ID="DropDownList2"
+ runat="server"
+ AutoPostBack="True"
+ OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+ <asp:ListItem>Ajay</asp:ListItem>
+ <asp:ListItem>Aditya</asp:ListItem>
+ <asp:ListItem>Anand</asp:ListItem>
+ <asp:ListItem>Shiv</asp:ListItem>
+ <asp:ListItem>Saurav</asp:ListItem>
+ <asp:ListItem>Kartikya</asp:ListItem>
+ </asp:DropDownList>
+<br /><br />
+ <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
+ <br /><br />
+ <asp:Image ID="Image1"
+ runat="server"
+ Width="160px"
+
+ImageUrl="https://upload.wikimedia.org/wikipedia/commons/d/df/Family_Portrait.jp
+g" />
+ </div>
+ </form>
+</body>
+</html>
+using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace practical3a
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ if (!IsPostBack)
+ {
+ ViewState["name"] = "Ajay";
+ }
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ lblstr.Text = ViewState["name"].ToString();
+ }
+ protected void Button2_Click(object sender, EventArgs e)
+ {
+TextBox1.Text = "";
+ foreach (ListItem item in ListBox1.Items)
+ {
+ if (item.Selected)
+ {
+ TextBox1.Text += item.Text + Environment.NewLine;
+ }
+ }
+ }
+protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs
+e)
+ {
+ lblstr.Font.Size = FontUnit.Point(
+ Convert.ToInt32(DropDownList1.SelectedItem.Text));
+ }
+ protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs
+e)
+ {
+ lblstr.Text = DropDownList2.SelectedItem.Text;
+ }
+ protected void RadioButton1_CheckedChanged(object sender, EventArgs e)
+ {
+ lblstr.BackColor = System.Drawing.Color.Red;
+ }
+ protected void RadioButton2_CheckedChanged(object sender, EventArgs e)
+ {
+ lblstr.BackColor = System.Drawing.Color.Green;
+ }
+ protected void RadioButton3_CheckedChanged(object sender, EventArgs e)
+ {
+ lblstr.BackColor = System.Drawing.Color.Blue;
+ }
+ protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+{
+ lblstr.Font.Bold = CheckBox1.Checked;
+ }
+ protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
+ {
+ lblstr.Font.Italic = CheckBox2.Checked;
+ }
+ protected void CheckBox3_CheckedChanged(object sender, EventArgs e)
+ {
+ lblstr.Font.Underline = CheckBox3.Checked;
+ }
+ }}
+
+
+
+Create a Registration form to demonstrate use of various validation
+controls. 
+
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="WebForm1.aspx.cs"
+ Inherits="practical4a.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>Validation Controls</title>
+ <script type="text/javascript">
+ function ValidateBtn_OnClick() {
+ return true;
+ }
+ function ClientValidate(source, args) {
+ if (args.Value.length == 8)
+ args.IsValid = true;
+ else
+ args.IsValid = false;
+ }
+</script>
+</head>
+<body>
+<form id="form1" runat="server">
+<div>
+ <asp:Label ID="Label1" runat="server" Text="Your Name"></asp:Label>
+ <br />
+ <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+ <asp:RequiredFieldValidator
+ ID="RequiredFieldValidator1"
+ runat="server"
+ ControlToValidate="txtName"
+ ErrorMessage="Please enter your name."
+ ForeColor="Red">
+ </asp:RequiredFieldValidator>
+ <br /><br />
+ <asp:Label ID="Label2" runat="server" Text="Enter Age"></asp:Label>
+ <br />
+ <asp:TextBox ID="txtAge" runat="server"></asp:TextBox>
+ <asp:RangeValidator
+ ID="RangeValidator1"
+ runat="server"
+ ControlToValidate="txtAge"
+ Type="Integer"
+ MinimumValue="18"
+ MaximumValue="60"
+ ErrorMessage="Age should be between 18 and 60."
+ ForeColor="Red">
+ </asp:RangeValidator>
+ <br /><br />
+<asp:Label ID="Label3" runat="server" Text="Password"></asp:Label>
+ <br />
+ <asp:TextBox
+ ID="txtPassword"
+ runat="server"
+ TextMode="Password">
+ </asp:TextBox>
+ <br /><br />
+ <asp:Label ID="Label4" runat="server" Text="Confirm Password"></asp:Label>
+ <br />
+ <asp:TextBox
+ ID="txtConfirm"
+ runat="server"
+ TextMode="Password">
+ </asp:TextBox>
+ <asp:CompareValidator
+ ID="CompareValidator1"
+ runat="server"
+ ControlToValidate="txtConfirm"
+ ControlToCompare="txtPassword"
+ Operator="Equal"
+ Type="String"
+ ErrorMessage="Passwords do not match."
+ ForeColor="Red">
+ </asp:CompareValidator>
+ <br /><br />
+ <asp:Label ID="Label5" runat="server" Text="Email"></asp:Label>
+ <br />
+ <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+ <asp:RegularExpressi
+ID="RegularExpressionValidator1"
+ runat="server"
+ ControlToValidate="txtEmail"
+ ErrorMessage="Enter a valid Email."
+ ValidationExpression="\w+([-.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+ ForeColor="Red">
+ </asp:RegularExpressionValidator>
+ <br /><br />
+ <asp:Label ID="Label6" runat="server" Text="Custom Text (8
+Characters)"></asp:Label>
+ <br />
+ <asp:TextBox ID="txtCustom" runat="server"></asp:TextBox>
+ <asp:CustomValidator
+ ID="CustomValidator1"
+ runat="server"
+ ControlToValidate="txtCustom"
+ ClientValidationFunction="ClientValidate"
+ OnServerValidate="ServerValidation"
+ ErrorMessage="Text must be exactly 8 characters."
+ ForeColor="Red">
+ </asp:CustomValidator>
+ <br /><br />
+ <asp:Label
+ ID="lbl1"
+ runat="server"
+ ForeColor="Green">
+ </asp:Label>
+ <br />
+ <asp:Button
+ ID="Button1"
+ runat="server"
+ Text="Validate"
+OnClick="Button1_Click"
+ OnClientClick="return ValidateBtn_OnClick();" />
+ <br /><br />
+ <asp:ValidationSummary
+ ID="ValidationSummary1"
+ runat="server"
+ ForeColor="Red" />
+</div>
+</form>
+</body>
+</html>
+
+WebForm1.aspx.cs
+using System;
+namespace practical4a
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ if (Page.IsValid)
+ {
+ lbl1.Text = "Thank You!";
+ }
+ else
+ {
+ lbl1.Text = "Please correct the errors.";
+ }
+ }
+ protected void ServerValidation(object source,
+System.Web.UI.WebControls.ServerValidateEventArgs args)
+ {
+ if (args.Value.Length == 8)
+ args.IsValid = true;
+ else
+ args.IsValid = false;
+ }
+ }
+}
+
+Web.config
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+ <appSettings>
+ <add key="ValidationSettings:UnobtrusiveValidationMode" value="None"/>
+ </appSettings>
+ <system.web>
+ <compilation debug="true" targetFramework="4.5.2"/>
+ <httpRuntime targetFramework="4.5.2"/>
+ </system.web>
+</configuration>
+
+Create a web form to demonstrate use of Adrotator Control.
+Pract4b.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+ CodeBehind="Pract4b.aspx.cs"
+ Inherits="practl4b.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>AdRotator Example</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <asp:ScriptManager ID="ScriptManager1" runat="server">
+ </asp:ScriptManager>
+ <asp:Timer ID="Timer1" runat="server" Interval="2000">
+ </asp:Timer>
+ <br />
+ <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+ <Triggers>
+ <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+ </Triggers>
+ <ContentTemplate>
+ <asp:AdRotator
+ ID="AdRotator1"
+ runat="server"
+ AdvertisementFile="~/adds.xml"
+ Width="200px"
+ Height="200px">
+ </asp:AdRotator>
+ </ContentTemplate>
+ </asp:UpdatePanel
+</form>
+</body>
+</html>
+adds.xml
+Save this file in the project root.
+<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+ <Ad>
+ <ImageUrl>
+
+https://assets.unileversolutions.com/v1/37335556.png?im=AspectCrop=(640,640);Res
+ize=(640,640)
+ </ImageUrl>
+ <NavigateUrl>https://www.dove.com</NavigateUrl>
+ <AlternateText>Dove Soap</AlternateText>
+ </Ad>
+ <Ad>
+ <ImageUrl>
+https://www.jiomart.com/images/product/original/490819030/cinthol-lime-refreshingdeo-soap-100-g-buy-4-get-1-free-product-images-o490819030-p490819030-0-
+202203150113.jpg?im=Resize=(1000,1000)
+ </ImageUrl>
+ <NavigateUrl>https://www.jiomart.com</NavigateUrl>
+ <AlternateText>Cinthol Soap</AlternateText>
+ </Ad>
+</Advertisements>
+
+
+Create web forms to demonstrate use of Website Navigation controls and
+Site Map
+Step 1: Create a Web Forms Project
+1. Open Visual Studio 2019.
+2. Create ASP.NET Web Application (.NET Framework).
+3. Select Web Forms.
+4. Add the following files:
+○ Web.sitemap
+○ Default.aspx
+○ Page2.aspx
+○ Page3.aspx
+○ Page4.aspx
+Step 1
+Add Site Map file
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0">
+ <siteMapNode url="pract5a.aspx"
+ title="Home"
+ description="Home page of our website">
+ <siteMapNode url="clsProp.aspx"
+ title="Page2"
+ description="Page2" />
+ <siteMapNode url="Default3.aspx"
+ title="Page3"
+ description="Page3" />
+ <siteMapNode url="Default2.aspx"
+ title="Page4"
+ description="Page4" />
+ </siteMapNode>
+</siteMap>
+Step2:
+Add SiteMapDataSource control and Menu control from toolbox to the
+page 
+Step3:
+Pract5a.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="pract5a.aspx.cs"
+ Inherits="practical5a.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>Home</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="Home"></asp:Label>
+ <br /><br />
+ <asp:Menu ID="Menu1" runat="server"
+ DataSourceID="SiteMapDataSource1">
+ </asp:Menu>
+ <br />
+ <asp:SiteMapDataSource ID="SiteMapDataSource1"
+ runat="server">
+ </asp:SiteMapDataSource>
+ </div>
+ </form>
+</body>
+</html>
+
+Step 4:
+Default3.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="Default3.aspx.cs"
+ Inherits="practical5a.default3" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>Page3</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server"
+ Text="Home > Page3"></asp:Label>
+ <br /><br />
+ <asp:Menu ID="Menu1" runat="server"
+ DataSourceID="SiteMapDataSource1">
+ </asp:Menu>
+ <br /><br />
+ <asp:SiteMapDataSource ID="SiteMapDataSource1"
+ runat="server">
+ </asp:SiteMapDataSource>
+ </div>
+ </form>
+</body>
+</html>
+
+Create a web application to demonstrate various stages of ASP.NET Pages.
+View state:
+Pract5c.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+ Inherits="pract5cviewstate.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>ViewState Demo</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <asp:Label ID="Label1" runat="server" Text="ViewState Data:"></asp:Label>
+ <asp:Label ID="lblStr" runat="server"></asp:Label>
+ <br /><br />
+ <asp:Button ID="Button1"
+ runat="server"
+ Text="Get Data"
+ OnClick="Button1_Click" />
+ </div>
+ </form>
+</body>
+</html>
+
+
+Pract5c.aspx.cs
+using System;
+using System.Web.UI;
+namespace pract5cviewstate
+{
+ public partial class WebForm1 : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ // Executes only when the page loads for the first time
+ if (!IsPostBack)
+ {
+string str = "XYZ";
+ if (ViewState["nam"] == null)
+ {
+ ViewState["nam"] = str;
+ }
+ }
+ }
+ protected void Button1_Click(object sender, EventArgs e)
+ {
+ lblStr.Text = ViewState["nam"].ToString();
+ }
+ }
+}
+
+Cookies:
+Default5.aspx:
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="Default5.aspx.cs"
+Inherits="cookies.WebForm1" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<title></title>
+</head>
+<body id="BodyTag" runat="server">
+<form id="form1" runat="server">
+<div>
+<asp:DropDownList ID="ColorSelector" runat="server"
+AutoPostBack="True"
+OnSelectedIndexChanged="ColorSelector_IndexChanged">
+<asp:ListItem Value="white" Selected="True">Select colour
+</asp:ListItem>
+<asp:ListItem Value="red">red</asp:ListItem>
+<asp:ListItem Value="green">green</asp:ListItem>
+<asp:ListItem Value="blue">blue</asp:ListItem>
+</asp:DropDownList>
+</div>
+</form>
+</body>
+</html>
+
+Defult5.aspx.cs:
+
+ASP.NET Web Forms Session State
+Login.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+CodeBehind="Login.aspx.cs"
+ Inherits="SessionDemo.Login" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title>Login - Session State</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <h2>Login Form</h2>
+ <asp:Label ID="lblUsername" runat="server"
+ Text="Username:"></asp:Label>
+ <asp:TextBox ID="txtUsername" runat="server">
+ </asp:TextBox>
+ <br /><br />
+ <asp:Label ID="lblPassword" runat="server"
+ Text="Password:"></asp:Label>
+ <asp:TextBox ID="txtPassword" runat="server"
+ TextMode="Password">
+ </asp:TextBox>
+ <br /><br />
+ <asp:Button ID="btnLogin" runat="server"
+ Text="Login"
+ OnClick="btnLogin_Click" />
+ <br /><br />
+ <asp:Label ID="lblMessage" runat="server">
+ </asp:Label>
+</form>
+</body>
+</html>
+
+Login.aspx.cs
+using System;
+namespace SessionDemo
+{
+ public partial class Login : System.Web.UI.Page
+ {
+ protected void btnLogin_Click(object sender, EventArgs e)
+ {
+ string username = txtUsername.Text;
+ string password = txtPassword.Text;
+ // Check login details
+ if (username == "admin" && password == "1234")
+ {
+ // Store username in Session
+ Session["Username"] = username;
+ // Go to Welcome page
+ Response.Redirect("Welcome.aspx");
+ }
+ else
+ {
+ lblMessage.Text = "Invalid Username or Password";
+ }
+ }
+ }
+}
+
+
+Welcome.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+ CodeBehind="Welcome.aspx.cs"
+ Inherits="SessionDemo.Welcome" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title>Welcome</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <h2>Welcome Page</h2>
+ <asp:Label ID="lblWelcome" runat="server">
+ </asp:Label>
+ <br /><br />
+ <asp:Button ID="btnLogout" runat="server"
+ Text="Logout"
+ OnClick="btnLogout_Click" />
+ </form>
+</body>
+</html>
+
+Welcome.aspx.cs
+using System;
+namespace SessionDemo
+{
+ public partial class Welcome : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ // Check whether Session exists
+ if (Session["Username"] != null)
+ {
+ string username = Session["Username"].ToString();
+lblWelcome.Text = "Welcome, " + username;
+ }
+ else
+ {
+ Response.Redirect("Login.aspx");
+ }
+ }
+ protected void btnLogout_Click(object sender, EventArgs e)
+ {
+ // Clear Session
+ Session.Clear();
+ // Go back to Login page
+ Response.Redirect("Login.aspx");
+ }
+ }
+}
+
+
+Application State
+Default.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+ CodeBehind="Default.aspx.cs"
+ Inherits="ApplicationStateDemo.Default" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title>Application State</title>
+</head>
+<body>
+ <form id="form1" runat="server">
+ <h2>Application State - Visitor Counter</h2>
+asp:Button ID="btnVisit" runat="server"
+ Text="Count Visitor"
+ OnClick="btnVisit_Click" />
+ <br /><br />
+ <asp:Label ID="lblCount" runat="server">
+ </asp:Label>
+ </form>
+</body>
+</html>
+
+
+Default.aspx.cs
+using System;
+namespace ApplicationStateDemo
+{
+ public partial class Default : System.Web.UI.Page
+ {
+ protected void btnVisit_Click(object sender, EventArgs e)
+ {
+ // Check whether Application variable exists
+ if (Application["VisitorCount"] == null)
+ {
+ Application["VisitorCount"] = 0;
+ }
+ // Get current count
+ int count = (int)Application["VisitorCount"];
+ // Increase count
+ count++;
+ // Store updated count
+ Application["VisitorCount"] = count;
+ // Display count
+ lblCount.Text = "Total Visitors: " + count;
+ }
+ }
+}
+
+
+Create a web application for inserting and deleting records from the
+database.
+SQL Server Management Studio (SSMS), follow these simple steps.
+Step 1: Open SSMS
+1. Open SQL Server Management Studio.
+2. In Connect to Server:
+○ Server type: Database Engine
+○ Server name: Usually .\SQLEXPRESS or
+(localdb)\MSSQLLocalDB
+○ Authentication: Windows Authentication
+3. Click Connect.
+Step 2: Create a database
+In the left Object Explorer:
+1. Right-click Databases
+2. Select New Database...
+3. Enter:
+CollegeDB
+4. Click OK.
+You should now see:
+Databases
+ └── CollegeDB
+Step 3: Create a table
+You can create the table using SQL.
+1. Click New Query.
+2. Select CollegeDB from the database dropdown.
+3. Paste:
+CREATE TABLE Students
+(
+ StudentID INT IDENTITY(1,1) PRIMARY KEY,
+ StudentName VARCHAR(100) NOT NULL,
+ Course VARCHAR(50) NOT NULL,
+ Age INT
+);
+4. Click Execute or press F5.
+
+Step 4: Check the table
+Expand:
+CollegeDB
+ └── Tables
+ └── dbo.Students
+If you don't see it immediately, right-click Tables → Refresh.
+Step 5: Insert some test records
+Run:
+INSERT INTO Students (StudentName, Course, Age)
+VALUES
+('Rahul', 'BSc IT', 20),
+('Priya', 'BSc CS', 21),
+('Amit', 'BCA', 19);
+Then check the records:
+SELECT * FROM Students;
+
+CREATE DATABASE CollegeDB;
+GO
+USE CollegeDB;
+GO
+CREATE TABLE Students
+(
+ StudentID INT IDENTITY(1,1) PRIMARY KEY,
+ StudentName VARCHAR(100) NOT NULL,
+ Course VARCHAR(50) NOT NULL,
+ Age INT
+);
+
+
+ASPX page — Student.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+ CodeBehind="Student.aspx.cs"
+ Inherits="StudentApp.Student" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title>Student Record Management</title>
+</head>
+<body>
+<form id="form1" runat="server">
+
+<h2>Student Record Management</h2>
+ Student Name:
+ <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+ <br /><br />
+ Course:
+ <asp:TextBox ID="txtCourse" runat="server"></asp:TextBox>
+ <br /><br />
+ Age:
+ <asp:TextBox ID="txtAge" runat="server"></asp:TextBox>
+ <br /><br />
+ <asp:Button ID="btnInsert"
+ runat="server"
+ Text="Insert Record"
+ OnClick="btnInsert_Click" />
+ <br /><br />
+ <asp:Label ID="lblMessage"
+ runat="server"
+ ForeColor="Green">
+ </asp:Label>
+ <hr />
+ <h3>Student Records</h3>
+ <asp:GridView ID="GridView1"
+ runat="server"
+ AutoGenerateColumns="False"
+ DataKeyNames="StudentID"
+ OnRowDeleting="GridView1_RowDeleting">
+ <Columns>
+ <asp:BoundField
+ DataField="StudentID"
+ HeaderText="ID" />
+ <asp:BoundField
+DataField="StudentName"
+ HeaderText="Name" />
+ <asp:BoundField
+ DataField="Course"
+ HeaderText="Course" />
+ <asp:BoundField
+ DataField="Age"
+ HeaderText="Age" />
+ <asp:CommandField
+ ShowDeleteButton="True"
+ HeaderText="Action" />
+ </Columns>
+ </asp:GridView>
+</form>
+</body>
+</html>
+
+Code-behind — Student.aspx.cs
+using System;
+using System.Data;
+using System.Data.SqlClient;
+namespace StudentApp
+{
+ public partial class Student : System.Web.UI.Page
+ {
+ string connectionString =
+ @"Data Source=.\SQLEXPRESS;
+ Initial Catalog=CollegeDB;
+ Integrated Security=True";
+
+protected void Page_Load(object sender, EventArgs e)
+ {
+ if (!IsPostBack)
+ {
+ LoadStudents();
+ }
+ }
+ // INSERT RECORD
+ protected void btnInsert_Click(object sender, EventArgs e)
+ {
+ string name = txtName.Text;
+ string course = txtCourse.Text;
+ int age = Convert.ToInt32(txtAge.Text);
+ using (SqlConnection con =
+ new SqlConnection(connectionString))
+ {
+ string query =
+ "INSERT INTO Students " +
+ "(StudentName, Course, Age) " +
+ "VALUES (@Name, @Course, @Age)";
+ SqlCommand cmd =
+ new SqlCommand(query, con);
+ cmd.Parameters.AddWithValue("@Name", name);
+ cmd.Parameters.AddWithValue("@Course", course);
+ cmd.Parameters.AddWithValue("@Age", age);
+ con.Open();
+ cmd.ExecuteNonQuery();
+ }
+ lblMessage.Text = "Record inserted successfully.";
+ txtName.Text = "";
+ txtCourse.Text = "";
+ txtAge.Text = "";
+ LoadStudents();
+ }
+
+// DISPLAY RECORDS
+ private void LoadStudents()
+ {
+ using (SqlConnection con =
+ new SqlConnection(connectionString))
+ {
+ string query = "SELECT * FROM Students";
+ SqlDataAdapter da =
+ new SqlDataAdapter(query, con);
+ DataTable dt = new DataTable();
+ da.Fill(dt);
+ GridView1.DataSource = dt;
+ GridView1.DataBind();
+ }
+ }
+ // DELETE RECORD
+ protected void GridView1_RowDeleting(
+ object sender,
+ System.Web.UI.WebControls.GridViewDeleteEventArgs e)
+ {
+ int studentID =
+ Convert.ToInt32(
+ GridView1.DataKeys[e.RowIndex].Value);
+ using (SqlConnection con =
+ new SqlConnection(connectionString))
+ {
+ string query =
+ "DELETE FROM Students " +
+ "WHERE StudentID = @ID";
+ SqlCommand cmd =
+ new SqlCommand(query, con);
+ cmd.Parameters.AddWithValue("@ID", studentID);
+ con.Open();
+
+cmd.ExecuteNonQuery();
+ }
+ lblMessage.Text =
+ "Record deleted successfully.";
+ LoadStudents();
+ }
+ }
+}
+
+
+Create a web application to demonstrate use of various Ajax control
+Student Result Calculator
+AjaxResult.aspx
+<%@ Page Language="C#" AutoEventWireup="true"
+ CodeBehind="AjaxResult.aspx.cs"
+ Inherits="AjaxDemo.AjaxResult" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+ <title>AJAX Student Result Calculator</title>
+</head>
+<body>
+<form id="form1" runat="server">
+ <asp:ScriptManager ID="ScriptManager1" runat="server" />
+ <h2>Student Result Calculator using AJAX</h2>
+ <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+ <ContentTemplate>
+ Student Name:
+ <asp:TextBox ID="txtName" runat="server" />
+ <br /><br />
+ Python Marks:
+ <asp:TextBox ID="txtPython" runat="server" />
+ <br /><br />
+ ASP.NET Marks:
+ <asp:TextBox ID="txtAsp" runat="server" />
+ <br /><br />
+ Database Marks:
+ <asp:TextBox ID="txtDB" runat="server" />
+ <br /><br />
+ <asp:Button
+ ID="btnCalculate"
+ runat="server"
+ Text="Calculate Result"
+ OnClick="btnCalculate_Click" />
+<br /><br />
+ <asp:Label
+ ID="lblResult"
+ runat="server"
+ Font-Bold="true">
+ </asp:Label>
+ </ContentTemplate>
+ </asp:UpdatePanel>
+ <asp:UpdateProgress
+ ID="UpdateProgress1"
+ runat="server"
+ AssociatedUpdatePanelID="UpdatePanel1">
+ <ProgressTemplate>
+ <b>Calculating result...</b>
+ </ProgressTemplate>
+ </asp:UpdateProgress>
+</form>
+</body>
+</html>
+
+
+AjaxResult.aspx.cs
+using System;
+namespace AjaxDemo
+{
+ public partial class AjaxResult : System.Web.UI.Page
+ {
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ }
+ protected void btnCalculate_Click(object sender, EventArgs e)
+ {
+int python, asp, db;
+ // Check whether entered values are valid numbers
+ if (int.TryParse(txtPython.Text, out python) &&
+ int.TryParse(txtAsp.Text, out asp) &&
+ int.TryParse(txtDB.Text, out db))
+ {
+ // Check valid marks range
+ if (python >= 0 && python <= 100 &&
+ asp >= 0 && asp <= 100 &&
+ db >= 0 && db <= 100)
+ {
+ int total;
+ double percentage;
+ string grade;
+ string result;
+ // Calculate total
+ total = python + asp + db;
+ // Calculate percentage
+ percentage = total / 3.0;
+ // Check pass or fail
+ if (python < 40 || asp < 40 || db < 40)
+ {
+ result = "FAIL";
+ grade = "F";
+ }
+ else
+ {
+ result = "PASS";
+ // Calculate grade
+ if (percentage >= 75)
+ grade = "A+";
+ else if (percentage >= 60)
+ grade = "A";
+ else if (percentage >= 50)
+ grade = "B";
+ else if (percentage >= 40)
+grade = "C";
+ else
+ grade = "F";
+ }
+ // Display result
+ lblResult.Text =
+ "Student Name: " + txtName.Text +
+ "<br/>Total Marks: " + total + " / 300" +
+ "<br/>Percentage: " +
+ percentage.ToString("0.00") + "%" +
+ "<br/>Grade: " + grade +
+ "<br/>Result: " + result;
+ }
+ else
+ {
+ lblResult.Text =
+ "Please enter marks between 0 and 100.";
+ }
+ }
+ else
+ {
+ lblResult.Text =
+ "Please enter valid numeric marks.";
+ }
+ }
+ }
+}
+
+
+
+
