@@ -1,0 +1,194 @@
+using System;
+class Program
+{
+ static void Main()
+ {
+ Console.Write("Enter the number of terms for Fibonacci series: ");
+ int terms = Convert.ToInt32(Console.ReadLine());
+ Console.WriteLine("\nFibonacci Series:");
+ int first = 0, second = 1, next;
+ for (int i = 0; i < terms; i++)
+ {
+ if (i <= 1)
+ next = i;
+ else
+ {
+ next = first + second;
+ first = second;
+ second = next;
+ }
+ Console.Write(next + " ");
+ }
+ Console.WriteLine(); // For spacing
+ }
+}
+
+
+Prime No.
+using System;
+class Program
+{
+ static void Main()
+ {
+ Console.Write("Enter a number to check if it is prime: ");
+ int number = Convert.ToInt32(Console.ReadLine());
+ if (IsPrime(number))
+ {
+ Console.WriteLine($"{number} is a Prime Number.");
+ }
+ else
+ {
+ Console.WriteLine($"{number} is NOT a Prime Number.");
+ }
+ }
+ static bool IsPrime(int num)
+ {
+ if (num <= 1)
+ return false;
+ for (int i = 2; i <= Math.Sqrt(num); i++)
+ {
+ if (num % i == 0)
+ return false;
+ }
+ return true;
+ }
+}
+
+
+Factorial No.
+using System;
+namespace Factorial
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ int number, fact = 1;
+ Console.WriteLine("Enter a non-negative integer:");
+ // Input validation
+ if (int.TryParse(Console.ReadLine(), out number) && number >=
+0)
+ {
+ for (int i = 1; i <= number; i++)
+ {
+ fact *= i;
+ }
+ Console.WriteLine($"\nFactorial of {number} is: {fact}");
+ }
+ else
+ {
+ Console.WriteLine("Invalid input! Please enter a non-negative
+integer.");
+ }
+ Console.ReadLine();
+ }
+ }
+}
+
+Temperature Conversion
+using System;
+namespace TemperatureConversion
+{
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ Console.WriteLine("Enter the Temperature in Celsius (°C):");
+ // Input validation
+ if (int.TryParse(Console.ReadLine(), out int celsius))
+ {
+ int fahrenheit = (celsius * 9) / 5 + 32;
+ Console.WriteLine("Temperature in Fahrenheit (°F): " +
+fahrenheit);
+ }
+ else
+ {
+ Console.WriteLine("Invalid input! Please enter a valid integer
+temperature.");
+ }
+ Console.ReadLine();
+ }
+ }
+}
+
+
+Money Conversion
+using System;
+namespace CurrencyConverter
+{
+ class Program
+ {
+static void Main(string[] args)
+ {
+ double amount, result;
+ double usdRate = 83.20; // Example: 1 USD = 83.20 INR (can be
+updated)
+ int choice;
+ Console.WriteLine("Currency Converter");
+ Console.WriteLine("1. INR to USD");
+ Console.WriteLine("2. USD to INR");
+ Console.Write("Enter your choice (1 or 2): ");
+ choice = int.Parse(Console.ReadLine());
+ if (choice == 1)
+ {
+ Console.Write("Enter amount in INR: ");
+ amount = double.Parse(Console.ReadLine());
+ result = amount / usdRate;
+ Console.WriteLine("Equivalent USD: $" +
+result.ToString("0.00"));
+ }
+ else if (choice == 2)
+ {
+ Console.Write("Enter amount in USD: ");
+ amount = double.Parse(Console.ReadLine());
+ result = amount * usdRate;
+ Console.WriteLine("Equivalent INR: ₹" +
+result.ToString("0.00"));
+ }
+ else
+ {
+ Console.WriteLine("Invalid choice.");
+ }
+ Console.ReadLine();
+ }
+ }
+}
+
+
+Function Overloading
+using System;
+namespace Swap
+{
+ class Overloading
+ {
+ public void swap(ref int n, ref int m)
+ {
+ int t = n;
+ n = m;
+ m = t;
+ }
+ public void swap(ref float f1, ref float f2)
+ {
+ float temp = f1;
+ f1 = f2;
+ f2 = temp;
+ }
+ }
+ class Program
+ {
+ static void Main(string[] args)
+ {
+ Overloading objOverloading = new Overloading();
+ int n = 10, m = 20;
+ objOverloading.swap(ref n, ref m);
+ Console.WriteLine("After Swapping Integers: N = " + n + "\tM = "
++ m);
+ float f1 = 10.5f, f2 = 20.6f;
+ objOverloading.swap(ref f1, ref f2);
+Console.WriteLine("After Swapping Floats: F1 = " + f1 + "\tF2 = "
++ f2);
+ Console.ReadLine(); // Pause to view output
+ }
+ }
+}
+
